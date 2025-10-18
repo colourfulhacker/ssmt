@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import SEO from '../components/SEO';
 import WhatsAppForm from '../components/WhatsAppForm';
+import Technologies from '../components/Technologies';
 import { 
   FaUsers, FaShieldAlt, FaBrain, FaGraduationCap, FaCloud, FaLock,
   FaCode, FaDatabase, FaNetworkWired, FaCertificate, FaCheckCircle,
@@ -495,6 +496,9 @@ Looking forward to hearing from you!`;
           </motion.div>
         </div>
       )}
+
+      {/* Technologies Section */}
+      <Technologies />
 
       {/* Final CTA */}
       <section className="section-padding bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
