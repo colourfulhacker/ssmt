@@ -113,7 +113,6 @@ const openPositions = [
     department: 'Marketing',
     location: 'Bengaluru',
     type: 'Internship',
-    experience: 'Fresher / Student',
   },
   {
     title: 'Technical Trainer',
@@ -306,9 +305,11 @@ export default function Careers() {
                       <span className="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
                         {position.type}
                       </span>
-                      <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg text-sm font-medium">
-                        {position.experience}
-                      </span>
+                      {position.experience && (
+                        <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg text-sm font-medium">
+                          {position.experience}
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2">

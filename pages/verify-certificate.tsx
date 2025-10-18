@@ -2,7 +2,17 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaCertificate, FaCheckCircle, FaTimesCircle, FaSearch } from 'react-icons/fa';
 import SEO from '../components/SEO';
-import { supabase, Certificate } from '../lib/supabase';
+
+interface Certificate {
+  id: number;
+  certificate_code: string;
+  student_name: string;
+  student_email: string;
+  course_name: string;
+  course_description: string;
+  issue_date: string;
+  completion_date: string;
+}
 
 export default function VerifyCertificate() {
   const [certificateCode, setCertificateCode] = useState('');
@@ -19,26 +29,15 @@ export default function VerifyCertificate() {
     setSearched(true);
 
     try {
-      if (!supabase) {
-        setError('Certificate verification service is not configured. Please contact support.');
-        setLoading(false);
-        return;
-      }
-
-      const { data, error: dbError } = await supabase
-        .from('certificates')
-        .select('*')
-        .eq('certificate_code', certificateCode.trim().toUpperCase())
-        .single();
-
-      if (dbError) {
-        if (dbError.code === 'PGRST116') {
-          setError('Certificate not found. Please check the code and try again.');
-        } else {
-          setError('An error occurred while verifying. Please try again.');
-        }
-      } else {
+      const response = await fetch(`/api/verify-certificate?code=${encodeURIComponent(certificateCode.trim())}`);
+      
+      if (response.ok) {
+        const data = await response.json();
         setCertificate(data);
+      } else if (response.status === 404) {
+        setError('Certificate not found. Please check the code and try again.');
+      } else {
+        setError('An error occurred while verifying. Please try again.');
       }
     } catch (err) {
       setError('An error occurred while verifying. Please try again.');

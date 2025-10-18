@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div className="space-y-4">
             <Image
               src="https://assets.zyrosite.com/dOqbv9lxjqcgzaab/logo-1a5478-YleMKeBbKPtZ382E.svg"
@@ -40,6 +40,16 @@ const Footer = () => {
               <li><Link href="/careers" className="text-gray-300 hover:text-blue-400 transition-colors">Careers</Link></li>
               <li><Link href="/portfolio" className="text-gray-300 hover:text-blue-400 transition-colors">Portfolio</Link></li>
               <li><Link href="/verify-certificate" className="text-yellow-400 hover:text-yellow-300 transition-colors font-semibold">Verify Certificate</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+            <ul className="space-y-2">
+              <li><Link href="/privacy-policy" className="text-gray-300 hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms-of-service" className="text-gray-300 hover:text-blue-400 transition-colors">Terms of Service</Link></li>
+              <li><Link href="/refund-policy" className="text-gray-300 hover:text-blue-400 transition-colors">Refund Policy</Link></li>
+              <li><Link href="/disclaimer" className="text-gray-300 hover:text-blue-400 transition-colors">Disclaimer</Link></li>
             </ul>
           </div>
 
@@ -86,6 +96,17 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} SSMT Solutions. All rights reserved.</p>
+          <p className="mt-2">
+            Developed by{' '}
+            <a 
+              href="https://cehpoint.co.in" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+            >
+              CEHpoint
+            </a>
+          </p>
         </div>
       </div>
     </footer>

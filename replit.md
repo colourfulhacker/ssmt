@@ -17,12 +17,12 @@ A professional, corporate-level website for SSMT Solutions - a leading technolog
 ```
 ├── components/
 │   ├── Navbar.tsx              # Responsive navigation
-│   ├── Footer.tsx              # Footer with certificate verification link
+│   ├── Footer.tsx              # Footer with policy links and CEHpoint credit
 │   ├── Layout.tsx              # Main layout wrapper
 │   ├── SEO.tsx                 # SEO metadata component
 │   ├── StructuredData.tsx      # JSON-LD structured data
 │   ├── FactsSlider.tsx         # Facts carousel
-│   ├── CompanyFactsSlider.tsx  # Professional company metrics slider (NEW)
+│   ├── CompanyFactsSlider.tsx  # Professional company metrics slider
 │   ├── CostCalculator.tsx      # Service cost calculator
 │   ├── WhatsAppLeadForm.tsx    # WhatsApp lead generation
 │   └── WorkWithUsForm.tsx      # Career application form
@@ -34,21 +34,37 @@ A professional, corporate-level website for SSMT Solutions - a leading technolog
 │   ├── contact.tsx             # Contact page with locations
 │   ├── training.tsx            # Training & Internship programs
 │   ├── portfolio.tsx           # Portfolio showcase
-│   ├── careers.tsx             # Careers with Work With Us form (REDESIGNED)
-│   ├── verify-certificate.tsx  # Certificate verification (NEW)
+│   ├── careers.tsx             # Careers with Work With Us form
+│   ├── admin.tsx               # Admin panel for certificate management (NEW)
+│   ├── verify-certificate.tsx  # Certificate verification
+│   ├── privacy-policy.tsx      # Privacy Policy (NEW)
+│   ├── terms-of-service.tsx    # Terms of Service (NEW)
+│   ├── refund-policy.tsx       # Refund Policy (NEW)
+│   ├── disclaimer.tsx          # Disclaimer (NEW)
+│   ├── api/
+│   │   ├── verify-certificate.ts  # Certificate verification API
+│   │   └── admin/
+│   │       ├── init-db.ts         # Database initialization
+│   │       ├── students.ts        # Student management API
+│   │       ├── courses.ts         # Course management API
+│   │       └── certificates.ts    # Certificate issuance API
 │   └── services/
 │       ├── consultancy.tsx     # Support & Consultancy details
 │       └── training-research.tsx # Training & Research details
 ├── lib/
-│   └── supabase.ts             # Supabase client configuration (NEW)
+│   ├── supabase.ts             # Supabase client configuration
+│   └── db.ts                   # PostgreSQL database utilities (NEW)
 ├── scripts/
-│   └── setup-certificate-db.sql # Database setup script (NEW)
+│   └── setup-certificate-db.sql # Database setup script
 ├── styles/
 │   └── globals.css             # Global styles with Tailwind
 └── Configuration Files
     ├── tailwind.config.js      # Tailwind configuration
     ├── next.config.ts          # Next.js configuration
-    └── next-sitemap.config.js  # Sitemap configuration
+    ├── next-sitemap.config.js  # Sitemap configuration
+    ├── vercel.json             # Vercel deployment config (NEW)
+    ├── .env.example            # Environment variables template (NEW)
+    └── DEPLOYMENT.md           # Deployment guide (NEW)
 ```
 
 ## Features
@@ -126,20 +142,32 @@ A professional, corporate-level website for SSMT Solutions - a leading technolog
 
 ## Configuration Required
 
-### 1. WhatsApp Number
+### 1. Database Connection
+Add to Replit Secrets or `.env.local`:
+- `DATABASE_URL` - PostgreSQL connection string
+
+Example:
+```
+DATABASE_URL=postgresql://user:password@host:port/database
+```
+
+### 2. WhatsApp Number
 Update the WhatsApp number in these files:
-- `components/WhatsAppLeadForm.tsx` (line 22)
-- `components/WorkWithUsForm.tsx` (line 52)
+- `components/WhatsAppLeadForm.tsx`
+- `components/WorkWithUsForm.tsx`
 
 Change from `919432588119` to your actual number.
 
-### 2. Supabase Environment Variables
+### 3. Database Initialization
+After deployment:
+1. Navigate to `/admin` page
+2. Click "Initialize Database" button
+3. This creates all required tables (students, courses, certificates)
+
+### 4. Optional Supabase Variables (if using Supabase features)
 Add these to Replit Secrets:
 - `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anon/public key
-
-### 3. Database Setup
-Run `scripts/setup-certificate-db.sql` in your Supabase SQL editor to create the certificates table.
 
 ## Development
 
@@ -172,7 +200,64 @@ The Next.js Server workflow automatically starts on port 5000.
 
 ## Recent Changes
 
-### October 18, 2025 (Latest) - Careers Page Enhancements
+### October 18, 2025 (Latest) - Major Feature Updates
+
+**Admin Panel System:**
+- Created comprehensive admin panel at `/admin` for certificate management
+- Features: Database initialization, student management, course management, certificate issuance
+- Real-time data display with tabbed interface
+- Form validation and error handling
+- PostgreSQL database integration with connection pooling
+
+**Database Schema:**
+- Migrated from Supabase to direct PostgreSQL connection
+- Three main tables: students, courses, certificates
+- Foreign key relationships and constraints
+- Indexed certificate codes for fast lookup
+- Secure environment variable configuration
+
+**Policy Pages:**
+- Added Privacy Policy page (`/privacy-policy`)
+- Added Terms of Service page (`/terms-of-service`)
+- Added Refund Policy page (`/refund-policy`)
+- Added Disclaimer page (`/disclaimer`)
+- All pages fully compliant with legal requirements
+- Comprehensive content covering all aspects of business operations
+
+**Footer Updates:**
+- Added "Legal" section with links to all policy pages
+- Added "Developed by CEHpoint" credit with backlink to cehpoint.co.in
+- Responsive 5-column layout for better organization
+
+**Career Page Improvements:**
+- Removed experience level display for internship positions
+- Cleaner UI for intern job listings
+- Conditional rendering of experience badges
+
+**Vercel Deployment Ready:**
+- Created `vercel.json` configuration
+- Environment variable documentation in `.env.example`
+- Serverless-ready API routes
+- Comprehensive deployment guide in `DEPLOYMENT.md`
+
+**API Routes:**
+- `POST /api/admin/init-db` - Initialize database schema
+- `GET /api/admin/students` - List all students
+- `POST /api/admin/students` - Add new student
+- `GET /api/admin/courses` - List all courses
+- `POST /api/admin/courses` - Add new course
+- `GET /api/admin/certificates` - List all certificates
+- `POST /api/admin/certificates` - Issue new certificate
+- `GET /api/verify-certificate?code={code}` - Verify certificate by code
+
+**Technical Improvements:**
+- PostgreSQL connection pooling for better performance
+- Secure credential management via environment variables
+- Error handling and validation across all API routes
+- SEO optimization on all policy pages
+- Mobile-responsive admin panel
+
+### October 18, 2025 - Careers Page Enhancements
 
 **Professional Company Facts Slider:**
 - Created `CompanyFactsSlider.tsx` component with animated company statistics
@@ -275,10 +360,13 @@ The Next.js Server workflow automatically starts on port 5000.
 - Mobile-first design approach throughout
 
 ## Future Enhancements Suggestions
-- Admin panel for certificate management
+- Admin authentication and authorization
 - Blog section for SEO
 - Client testimonials section
 - Live chat integration
 - Payment gateway for training enrollment
 - Automated email notifications
 - Analytics dashboard
+- Certificate PDF generation and download
+- Bulk certificate upload
+- Student portal for certificate access
