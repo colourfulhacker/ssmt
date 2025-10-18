@@ -1,8 +1,13 @@
 {
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 10
+    }
+  },
   "env": {
     "DATABASE_URL": "@database_url",
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key"
+    "SESSION_SECRET": "@session_secret",
+    "ADMIN_PASSWORD_HASH": "@admin_password_hash"
   },
   "build": {
     "env": {

@@ -14,11 +14,21 @@ export function getPool(): Pool {
       connectionString,
       ssl: {
         rejectUnauthorized: false
-      }
+      },
+      max: 20,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
     });
   }
 
   return pool;
+}
+
+export async function closePool() {
+  if (pool) {
+    await pool.end();
+    pool = null;
+  }
 }
 
 export interface Student {

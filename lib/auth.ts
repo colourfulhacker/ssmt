@@ -8,8 +8,19 @@ export interface SessionData {
   username?: string;
 }
 
+function getSessionPassword(): string {
+  const sessionSecret = process.env.SESSION_SECRET;
+  if (!sessionSecret || sessionSecret.length < 32) {
+    throw new Error(
+      'SECURITY ERROR: SESSION_SECRET environment variable is required and must be at least 32 characters long. ' +
+      'Generate one using: node -e "console.log(require(\'crypto\').randomBytes(32).toString(\'hex\'))"'
+    );
+  }
+  return sessionSecret;
+}
+
 export const sessionOptions: SessionOptions = {
-  password: process.env.SESSION_SECRET || 'complex_password_at_least_32_characters_long_for_session_security',
+  password: getSessionPassword(),
   cookieName: 'admin_session',
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
