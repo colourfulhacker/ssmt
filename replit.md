@@ -22,9 +22,10 @@ A professional, corporate-level website for SSMT Solutions - a leading technolog
 │   ├── SEO.tsx                 # SEO metadata component
 │   ├── StructuredData.tsx      # JSON-LD structured data
 │   ├── FactsSlider.tsx         # Facts carousel
-│   ├── CostCalculator.tsx      # Service cost calculator (NEW)
-│   ├── WhatsAppLeadForm.tsx    # WhatsApp lead generation (NEW)
-│   └── WorkWithUsForm.tsx      # Career application form (NEW)
+│   ├── CompanyFactsSlider.tsx  # Professional company metrics slider (NEW)
+│   ├── CostCalculator.tsx      # Service cost calculator
+│   ├── WhatsAppLeadForm.tsx    # WhatsApp lead generation
+│   └── WorkWithUsForm.tsx      # Career application form
 ├── pages/
 │   ├── _app.tsx                # App wrapper with Layout
 │   ├── index.tsx               # Home page with ABCDE model
@@ -170,6 +171,35 @@ The Next.js Server workflow automatically starts on port 5000.
 9. **Service Details** - Individual service pages
 
 ## Recent Changes
+
+### October 18, 2025 (Latest) - Careers Page Enhancements
+
+**Professional Company Facts Slider:**
+- Created `CompanyFactsSlider.tsx` component with animated company statistics
+- Displays 8 key metrics: Years of Excellence, Projects Delivered, Team Size, Client Satisfaction, etc.
+- Auto-rotating slider with smooth transitions and professional dark theme
+- Integrated into careers page in dedicated "SSMT Solutions by the Numbers" section
+
+**Expanded Marketing Opportunities:**
+- Added 5 marketing positions to careers page:
+  - Digital Marketing Specialist
+  - Content Marketing Manager
+  - SEO Specialist
+  - Social Media Marketing
+  - Marketing Intern
+- All positions included in both careers page and apply form
+
+**Smart Application Forms:**
+- Internship applications now exclude "Notice Period" field
+- Conditional field labels: "Stipend" for internships, "CTC" for jobs
+- WhatsApp message template properly includes stipend data for internships
+- Separate messaging for internship vs full-time applications
+
+**User Experience Improvements:**
+- Professional, corporate-appropriate design (no childish elements)
+- Clear differentiation between job types (Freelancer, Full-time, Internship)
+- Mobile-responsive throughout
+- All data properly captured and sent via WhatsApp
 
 ### October 18, 2025 - Complete Website Transformation
 
