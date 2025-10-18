@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
+import FactsSlider from '../components/FactsSlider';
 import { FaCloud, FaShieldAlt, FaChartLine, FaRocket, FaCode, FaDatabase, FaBrain, FaServer } from 'react-icons/fa';
 
 const technologies = [
@@ -38,7 +40,16 @@ export default function Home() {
     <>
       <SEO
         title="Home"
-        description="SSMT Solutions - Empowering Digital Transformation with AI-Driven Cloud and Cybersecurity Solutions. Leading provider of digital marketing and tech solutions in Bengaluru."
+        description="SSMT Solutions - Empowering Digital Transformation with AI-Driven Cloud and Cybersecurity Solutions. Leading provider of digital marketing and tech solutions in Bengaluru, Karnataka."
+        keywords="SSMT Solutions, digital transformation, AI solutions, cloud computing, cybersecurity, data engineering, software development, Bengaluru, Karnataka"
+      />
+      <StructuredData type="organization" />
+      <StructuredData type="website" />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: 'https://ssmtsolutions.com/' }
+        ]} 
       />
 
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden">
@@ -95,6 +106,10 @@ export default function Home() {
       </section>
 
       <section className="section-padding bg-white">
+        <FactsSlider />
+      </section>
+
+      <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -131,7 +146,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-padding bg-gradient-to-br from-gray-50 to-white">
+      <section className="section-padding bg-white">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

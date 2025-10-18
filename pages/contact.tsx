@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaFacebook } from 'react-icons/fa';
 
 export default function Contact() {
@@ -10,6 +11,14 @@ export default function Contact() {
         title="Contact Us"
         description="Get in touch with SSMT Solutions. Contact our offices in Bengaluru and Jharkhand. Call us at +91 9432588119 or email info@ssmtsolutions.com"
         keywords="contact SSMT Solutions, Bengaluru office, Jharkhand office, email, phone, address"
+      />
+      <StructuredData type="organization" />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: 'https://ssmtsolutions.com/' },
+          { name: 'Contact Us', url: 'https://ssmtsolutions.com/contact' }
+        ]} 
       />
 
       <section className="relative py-20 bg-gradient-to-br from-blue-600 to-purple-600 text-white">

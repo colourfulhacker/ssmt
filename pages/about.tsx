@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import SEO from '../components/SEO';
+import StructuredData from '../components/StructuredData';
 import { FaRocket, FaLightbulb, FaHandshake, FaTrophy } from 'react-icons/fa';
 
 const coreValues = [
@@ -33,6 +34,14 @@ export default function About() {
         title="About Us"
         description="Learn about SSMT Solutions - a leading tech-digital marketing provider based in Bengaluru, Karnataka, offering innovative solutions in cloud, AI, and digital transformation."
         keywords="about SSMT Solutions, digital marketing Bengaluru, tech solutions Karnataka, company values, mission vision"
+      />
+      <StructuredData type="organization" />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: 'https://ssmtsolutions.com/' },
+          { name: 'About Us', url: 'https://ssmtsolutions.com/about' }
+        ]} 
       />
 
       <section className="relative py-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white overflow-hidden">
