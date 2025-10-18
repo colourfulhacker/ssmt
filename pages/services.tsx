@@ -175,8 +175,8 @@ export default function Services() {
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
               Let&apos;s discuss how our services can help transform your business
             </p>
-            <Link href="/contact" className="inline-block px-8 py-4 bg-white text-blue-600 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-              Contact Us Today
+            <Link href="/get-quote" className="inline-block px-8 py-4 bg-white text-blue-600 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              Get a Quote
             </Link>
           </motion.div>
         </div>

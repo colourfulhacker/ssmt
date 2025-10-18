@@ -160,7 +160,7 @@ export default function Careers() {
                       </span>
                     </div>
                   </div>
-                  <Link href="/contact" className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                  <Link href="/apply" className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-center">
                     Apply Now
                   </Link>
                 </div>

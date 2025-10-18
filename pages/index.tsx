@@ -207,8 +207,8 @@ export default function Home() {
             <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-95 leading-relaxed">
               Let&apos;s collaborate to bring your digital vision to life with innovative solutions
             </p>
-            <Link href="/contact" className="inline-block px-10 py-5 bg-white text-blue-600 rounded-full font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 text-lg">
-              Start Your Journey →
+            <Link href="/get-quote" className="inline-block px-10 py-5 bg-white text-blue-600 rounded-full font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 text-lg">
+              Get Started →
             </Link>
           </motion.div>
         </div>

@@ -249,7 +249,7 @@ function TrainingCard({ training, index }: { training: typeof trainings[0]; inde
         )}
       </AnimatePresence>
       
-      <Link href="/contact">
+      <Link href={`/enroll?program=${encodeURIComponent(training.title)}`}>
         <button className={`w-full py-3 px-6 bg-gradient-to-r ${training.color} text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}>
           Enroll Now
         </button>
@@ -396,8 +396,8 @@ export default function Training() {
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
               Join our training programs and take the next step in your career
             </p>
-            <Link href="/contact" className="inline-block px-8 py-4 bg-white text-blue-600 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-              Contact Us to Enroll
+            <Link href="/enroll" className="inline-block px-8 py-4 bg-white text-blue-600 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              Enroll Now
             </Link>
           </motion.div>
         </div>
