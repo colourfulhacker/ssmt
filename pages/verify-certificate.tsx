@@ -19,6 +19,12 @@ export default function VerifyCertificate() {
     setSearched(true);
 
     try {
+      if (!supabase) {
+        setError('Certificate verification service is not configured. Please contact support.');
+        setLoading(false);
+        return;
+      }
+
       const { data, error: dbError } = await supabase
         .from('certificates')
         .select('*')

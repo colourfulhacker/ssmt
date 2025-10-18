@@ -24,6 +24,7 @@ module.exports = {
       '/training': 0.9,
       '/contact': 0.8,
       '/portfolio': 0.8,
+      '/verify-certificate': 0.7,
       '/careers': 0.7,
     };
 
