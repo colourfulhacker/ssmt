@@ -1,10 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { addCertificate, getAllCertificates } from '../../../lib/db';
+import { requireAuth } from '../../../lib/auth';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const isAuthenticated = await requireAuth(req, res);
+  if (!isAuthenticated) return;
+
   try {
     if (req.method === 'GET') {
       const certificates = await getAllCertificates();
