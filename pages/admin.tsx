@@ -29,19 +29,37 @@ export default function Admin() {
     try {
       if (activeTab === 'students') {
         const res = await fetch('/api/admin/students');
-        const data = await res.json();
-        setStudents(data);
+        if (res.ok) {
+          const data = await res.json();
+          setStudents(Array.isArray(data) ? data : []);
+        } else {
+          console.error('Failed to load students');
+          setStudents([]);
+        }
       } else if (activeTab === 'courses') {
         const res = await fetch('/api/admin/courses');
-        const data = await res.json();
-        setCourses(data);
+        if (res.ok) {
+          const data = await res.json();
+          setCourses(Array.isArray(data) ? data : []);
+        } else {
+          console.error('Failed to load courses');
+          setCourses([]);
+        }
       } else if (activeTab === 'certificates') {
         const res = await fetch('/api/admin/certificates');
-        const data = await res.json();
-        setCertificates(data);
+        if (res.ok) {
+          const data = await res.json();
+          setCertificates(Array.isArray(data) ? data : []);
+        } else {
+          console.error('Failed to load certificates');
+          setCertificates([]);
+        }
       }
     } catch (error) {
       console.error('Failed to load data:', error);
+      if (activeTab === 'students') setStudents([]);
+      else if (activeTab === 'courses') setCourses([]);
+      else if (activeTab === 'certificates') setCertificates([]);
     }
   };
 
