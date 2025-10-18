@@ -1,9 +1,53 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 import FactsSlider from '../components/FactsSlider';
-import { FaCloud, FaShieldAlt, FaChartLine, FaRocket, FaCode, FaDatabase, FaBrain, FaServer } from 'react-icons/fa';
+import { FaCloud, FaShieldAlt, FaChartLine, FaRocket, FaCode, FaDatabase, FaBrain, FaServer, FaNetworkWired, FaCubes, FaLock, FaCogs } from 'react-icons/fa';
+
+const abcdeModel = [
+  {
+    letter: 'A',
+    title: 'AI & ML Solutions',
+    description: 'Artificial Intelligence and Machine Learning',
+    icon: FaBrain,
+    color: 'from-blue-500 to-blue-600',
+    details: ['Generative AI', 'NLP & LLMs', 'Deep Learning', 'Computer Vision'],
+  },
+  {
+    letter: 'B',
+    title: 'Blockchain & Networking',
+    description: 'Decentralized Solutions and Network Architecture',
+    icon: FaNetworkWired,
+    color: 'from-purple-500 to-purple-600',
+    details: ['Smart Contracts', 'DApps', 'Network Security', 'Infrastructure'],
+  },
+  {
+    letter: 'C',
+    title: 'Cloud & Cybersecurity',
+    description: 'Cloud Computing and Security Solutions',
+    icon: FaLock,
+    color: 'from-pink-500 to-pink-600',
+    details: ['AWS, Azure, GCP', 'Cloud Migration', 'Security Audit', 'Compliance'],
+  },
+  {
+    letter: 'D',
+    title: 'Data Engineering & DevOps',
+    description: 'Data Pipelines, DevOps & DevSecOps',
+    icon: FaDatabase,
+    color: 'from-indigo-500 to-indigo-600',
+    details: ['ETL Pipelines', 'CI/CD', 'Container Orchestration', 'Infrastructure as Code'],
+  },
+  {
+    letter: 'E',
+    title: 'Enterprise Management',
+    description: 'Business Solutions and Digital Transformation',
+    icon: FaCogs,
+    color: 'from-cyan-500 to-cyan-600',
+    details: ['ERP Systems', 'CRM Solutions', 'Process Automation', 'Digital Strategy'],
+  },
+];
 
 const technologies = [
   {
@@ -36,12 +80,21 @@ const values = [
 ];
 
 export default function Home() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % abcdeModel.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <SEO
         title="Home"
-        description="SSMT Solutions - Empowering Digital Transformation with AI-Driven Cloud and Cybersecurity Solutions. Leading provider of digital marketing and tech solutions in Bengaluru, Karnataka."
-        keywords="SSMT Solutions, digital transformation, AI solutions, cloud computing, cybersecurity, data engineering, software development, Bengaluru, Karnataka"
+        description="SSMT Solutions - Driving Growth with ABCDE Model: AI & ML, Blockchain & Networking, Cloud & Cybersecurity, Data Engineering & DevOps, Enterprise Management. Leading tech solutions provider in Bengaluru."
+        keywords="SSMT Solutions, ABCDE model, AI ML solutions, blockchain, cloud computing, cybersecurity, data engineering, DevOps, DevSecOps, enterprise management, Bengaluru, Karnataka"
       />
       <StructuredData type="organization" />
       <StructuredData type="website" />
@@ -58,24 +111,83 @@ export default function Home() {
         <div className="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000"></div>
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-4000"></div>
         
-        <div className="container-custom relative z-10 text-center">
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="text-center mb-12"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Empowering Digital Transformation
+              Driving Growth with
               <br />
-              <span className="gradient-text">with AI-Driven Solutions</span>
+              <span className="gradient-text">ABCDE Model</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-4xl mx-auto">
-              Leading the Way in Digital Marketing Solutions for Your Business Success
-            </p>
-            <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
-              SSMT Solutions stands as a leading provider of tech-driven digital marketing solutions, driven by a commitment to excellence, agility, and creativity in an ever-evolving landscape.
+              Your Complete Technology Partner for Digital Transformation
             </p>
           </motion.div>
+
+          <div className="max-w-6xl mx-auto mb-12">
+            <div className="relative h-80 md:h-96">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 100, rotateY: 90 }}
+                  animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                  exit={{ opacity: 0, x: -100, rotateY: -90 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <div className={`bg-gradient-to-br ${abcdeModel[currentIndex].color} rounded-3xl shadow-2xl p-8 md:p-12 max-w-4xl w-full transform hover:scale-105 transition-transform`}>
+                    <div className="flex flex-col md:flex-row items-center gap-8">
+                      <div className="flex-shrink-0">
+                        <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center shadow-lg">
+                          <span className="text-6xl md:text-8xl font-bold bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                            {abcdeModel[currentIndex].letter}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-white text-center md:text-left">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-3">
+                          {abcdeModel[currentIndex].title}
+                        </h2>
+                        <p className="text-lg md:text-xl mb-6 opacity-90">
+                          {abcdeModel[currentIndex].description}
+                        </p>
+                        <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                          {abcdeModel[currentIndex].details.map((detail, idx) => (
+                            <span
+                              key={idx}
+                              className="px-4 py-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-full text-sm font-medium"
+                            >
+                              {detail}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="flex justify-center gap-3 mt-8">
+              {abcdeModel.map((item, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`w-12 h-12 rounded-full font-bold text-lg transition-all ${
+                    idx === currentIndex
+                      ? 'bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white scale-110 shadow-lg'
+                      : 'bg-white text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  {item.letter}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -83,11 +195,11 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            <Link href="/services" className="btn-primary">
-              Explore Services
+            <Link href="/get-quote" className="btn-primary">
+              Get Started
             </Link>
-            <Link href="/contact" className="btn-secondary">
-              Get in Touch
+            <Link href="/services" className="btn-secondary">
+              Explore Services
             </Link>
           </motion.div>
         </div>
