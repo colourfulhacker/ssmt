@@ -22,6 +22,10 @@ externalPort = 80
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 40261
+externalPort = 3000
+
 [agent]
 expertMode = true
 
@@ -41,10 +45,10 @@ args = "Next.js Server"
 name = "Next.js Server"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev -- -p 5000"
 waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
