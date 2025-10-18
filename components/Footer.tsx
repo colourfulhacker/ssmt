@@ -104,7 +104,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
             >
-              CEHpoint
+              Cehpoint
             </a>
           </p>
         </div>
