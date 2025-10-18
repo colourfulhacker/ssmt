@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
-import { FaDatabase, FaUser, FaBook, FaCertificate, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { FaDatabase, FaUser, FaBook, FaCertificate, FaCheckCircle, FaTimesCircle, FaLock, FaSignOutAlt } from 'react-icons/fa';
 
 export default function Admin() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
   const [activeTab, setActiveTab] = useState('students');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   
@@ -22,8 +27,62 @@ export default function Admin() {
   });
 
   useEffect(() => {
-    loadData();
-  }, [activeTab]);
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadData();
+    }
+  }, [activeTab, isAuthenticated]);
+
+  const checkAuth = async () => {
+    try {
+      const res = await fetch('/api/admin/check-auth');
+      const data = await res.json();
+      setIsAuthenticated(data.isLoggedIn);
+    } catch (error) {
+      console.error('Auth check failed:', error);
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: loginPassword })
+      });
+
+      if (res.ok) {
+        setIsAuthenticated(true);
+        setLoginPassword('');
+      } else {
+        const data = await res.json();
+        setLoginError(data.error || 'Invalid password');
+      }
+    } catch (error) {
+      setLoginError('Login failed. Please try again.');
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' });
+      setIsAuthenticated(false);
+      setStudents([]);
+      setCourses([]);
+      setCertificates([]);
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   const loadData = async () => {
     try {
@@ -152,6 +211,82 @@ export default function Admin() {
     }
   };
 
+  if (isLoading) {
+    return (
+      <section className="relative py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-blue-50 min-h-screen flex items-center justify-center">
+        <div className="text-xl text-gray-600">Loading...</div>
+      </section>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <SEO
+          title="Admin Login - SSMT Solutions"
+          description="Admin panel login for SSMT Solutions"
+          keywords="admin login, SSMT Solutions admin"
+        />
+
+        <section className="relative py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-blue-50 min-h-screen flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="w-full max-w-md"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+                  <FaLock className="text-white text-2xl" />
+                </div>
+              </div>
+              
+              <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">
+                Admin Login
+              </h1>
+              <p className="text-center text-gray-600 mb-8">
+                Enter your password to access the admin panel
+              </p>
+
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    placeholder="Enter admin password"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                {loginError && (
+                  <div className="p-3 bg-red-100 text-red-800 rounded-lg flex items-center gap-2">
+                    <FaTimesCircle />
+                    {loginError}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all font-semibold flex items-center justify-center gap-2"
+                >
+                  <FaLock />
+                  Login
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        </section>
+      </>
+    );
+  }
+
   return (
     <>
       <SEO
@@ -171,13 +306,22 @@ export default function Admin() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                 Admin Panel
               </h1>
-              <button
-                onClick={initializeDatabase}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2"
-              >
-                <FaDatabase />
-                Initialize Database
-              </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={initializeDatabase}
+                  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2"
+                >
+                  <FaDatabase />
+                  Initialize Database
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all flex items-center gap-2"
+                >
+                  <FaSignOutAlt />
+                  Logout
+                </button>
+              </div>
             </div>
 
             {message && (
