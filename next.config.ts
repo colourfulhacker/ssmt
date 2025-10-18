@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  experimental: {
+    allowedDevOrigins: process.env.REPLIT_DEV_DOMAIN 
+      ? [`https://${process.env.REPLIT_DEV_DOMAIN}`] 
+      : [],
+  },
 };
 
 export default nextConfig;
