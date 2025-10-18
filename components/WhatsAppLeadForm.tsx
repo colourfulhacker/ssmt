@@ -21,7 +21,7 @@ export default function WhatsAppLeadForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const whatsappNumber = '919876543210';
+    const whatsappNumber = '919432588119';
     
     const message = `*New Lead from SSMT Website*\n\n` +
       `*Name:* ${formData.name}\n` +

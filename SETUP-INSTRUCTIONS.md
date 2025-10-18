@@ -20,11 +20,17 @@ Your website now includes:
 
 ### 1. WhatsApp Number Setup
 
-The WhatsApp lead form currently uses a placeholder number. Update it with your actual number:
+✅ **Already Configured** - All WhatsApp features now use: **+919432588119**
 
-**File:** `components/WhatsAppLeadForm.tsx`
-**Line 22:** Change `const whatsappNumber = '919876543210';`
-**To:** `const whatsappNumber = '91XXXXXXXXXX';` (your 10-digit number with 91 prefix)
+The following components are configured to use this number:
+- `components/WhatsAppLeadForm.tsx` - Quick WhatsApp connect form
+- `components/WorkWithUsForm.tsx` - Career application form
+- `pages/services.tsx` - Service inquiry form
+- `pages/get-quote.tsx` - Quote request form
+- `pages/enroll.tsx` - Training enrollment form
+- `pages/apply.tsx` - Job/internship application form
+
+All WhatsApp messages will be sent to +919432588119.
 
 ### 2. Supabase Environment Variables
 
