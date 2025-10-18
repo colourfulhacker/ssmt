@@ -1,172 +1,254 @@
 # SSMT Solutions Website
 
 ## Project Overview
-A world-class, professional website for SSMT Solutions - a leading tech-digital marketing provider based in Bengaluru, Karnataka. The website showcases the company's services, training programs, portfolio, and contact information with impressive UI/UX and proper SEO optimization.
+A professional, corporate-level website for SSMT Solutions - a leading technology services provider based in Bengaluru, Karnataka. The website showcases comprehensive services including job support, corporate training, white-label partnerships, development consultancy, and includes advanced features like cost calculator, WhatsApp lead generation, and certificate verification.
 
 ## Tech Stack
 - **Framework**: Next.js 15 with TypeScript
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS 3.4
 - **Animations**: Framer Motion
 - **Icons**: React Icons
-- **SEO**: Next SEO
+- **Database**: Supabase (PostgreSQL)
+- **Forms**: React Hook Form
+- **SEO**: Next SEO, Structured Data
 - **Deployment**: Optimized for Replit hosting
 
 ## Project Structure
 ```
 ├── components/
-│   ├── Navbar.tsx          # Responsive navigation with mobile menu
-│   ├── Footer.tsx          # Footer with contact info and links
-│   ├── Layout.tsx          # Main layout wrapper
-│   └── SEO.tsx             # SEO metadata component
+│   ├── Navbar.tsx              # Responsive navigation
+│   ├── Footer.tsx              # Footer with certificate verification link
+│   ├── Layout.tsx              # Main layout wrapper
+│   ├── SEO.tsx                 # SEO metadata component
+│   ├── StructuredData.tsx      # JSON-LD structured data
+│   ├── FactsSlider.tsx         # Facts carousel
+│   ├── CostCalculator.tsx      # Service cost calculator (NEW)
+│   ├── WhatsAppLeadForm.tsx    # WhatsApp lead generation (NEW)
+│   └── WorkWithUsForm.tsx      # Career application form (NEW)
 ├── pages/
-│   ├── _app.tsx            # App wrapper with Layout
-│   ├── index.tsx           # Home page with hero, values, technologies
-│   ├── about.tsx           # About page with company story and values
-│   ├── services.tsx        # Services overview page
-│   ├── contact.tsx         # Contact page with both locations
-│   ├── training.tsx        # Training & Internship programs
-│   ├── portfolio.tsx       # Portfolio showcase
-│   ├── careers.tsx         # Careers and open positions
+│   ├── _app.tsx                # App wrapper with Layout
+│   ├── index.tsx               # Home page with ABCDE model
+│   ├── about.tsx               # About page
+│   ├── services.tsx            # Services overview
+│   ├── contact.tsx             # Contact page with locations
+│   ├── training.tsx            # Training & Internship programs
+│   ├── portfolio.tsx           # Portfolio showcase
+│   ├── careers.tsx             # Careers with Work With Us form (REDESIGNED)
+│   ├── verify-certificate.tsx  # Certificate verification (NEW)
 │   └── services/
-│       ├── consultancy.tsx          # Support & Consultancy details
-│       └── training-research.tsx    # Training & Research details
+│       ├── consultancy.tsx     # Support & Consultancy details
+│       └── training-research.tsx # Training & Research details
+├── lib/
+│   └── supabase.ts             # Supabase client configuration (NEW)
+├── scripts/
+│   └── setup-certificate-db.sql # Database setup script (NEW)
 ├── styles/
-│   └── globals.css         # Global styles with Tailwind
-├── tailwind.config.js      # Tailwind configuration
-└── next.config.ts          # Next.js configuration
+│   └── globals.css             # Global styles with Tailwind
+└── Configuration Files
+    ├── tailwind.config.js      # Tailwind configuration
+    ├── next.config.ts          # Next.js configuration
+    └── next-sitemap.config.js  # Sitemap configuration
 ```
 
 ## Features
 
-### Navigation
-- Fixed header with logo
-- Smooth scroll navigation
-- Mobile-responsive hamburger menu
-- Active state indicators
+### Core Services (ABCDE Model)
+1. **A** - AI & ML Solutions (Generative AI, NLP, LLMs, Deep Learning)
+2. **B** - Blockchain & Networking (Smart Contracts, DApps, Network Security)
+3. **C** - Cloud & Cybersecurity (AWS, Azure, GCP, Security Audit)
+4. **D** - Data Engineering & DevOps (ETL Pipelines, CI/CD, Kubernetes)
+5. **E** - Enterprise Management (ERP, CRM, Process Automation)
 
-### Pages
-1. **Home**: Hero section with CTAs, core values, technologies, and CTA sections
-2. **About**: Company story, mission, vision, and core values
-3. **Services**: Overview of 5 main services with navigation to details
-4. **Training & Internship**: 4 training programs (Cybersecurity, Data Engineering, Data Science, DevOps)
-5. **Contact**: Dual locations (Bengaluru Contact Center, Jharkhand Development Center)
-6. **Portfolio**: Project showcase and success metrics
-7. **Careers**: Open positions and hiring process
-8. **Service Details**: 
-   - Support & Consultancy
-   - Training & Research
+### Service Offerings
+- **Job Support Services**: Hourly/daily/monthly development support for professionals
+- **Corporate Training**: Customized training programs for employee upskilling
+- **White-Label Partnerships**: Training partner programs with your branding
+- **Development Consultancy**: End-to-end development and technical consulting
+- **Freelance/Contract Work**: Flexible engagement models
+
+### Advanced Features
+
+#### 1. Cost Calculator (NEW)
+- Interactive service pricing in INR
+- Multiple service categories (Job Support, Development, Training, Consultancy)
+- Automatic GST (18%) calculation
+- Discount support
+- Real-time price updates
+
+#### 2. WhatsApp Lead Generation (NEW)
+- Direct wa.me integration
+- Collects user requirements
+- Instant WhatsApp connection
+- No backend required
+- GDPR-friendly
+
+#### 3. Certificate Verification System (NEW)
+- Supabase PostgreSQL database
+- Real-time certificate validation
+- Secure and scalable
+- Public verification interface
+- Sample certificates included for testing
+
+#### 4. Work With Us Form (NEW)
+- Career application via WhatsApp
+- Hourly rate and salary expectations
+- Experience level selection
+- Work type preferences (Full-time, Part-time, Contract, Freelance)
+- Skills and availability tracking
 
 ### Design Features
-- **Premium Visual Design**:
-  - Tri-color gradients (blue → purple → pink)
-  - Animated floating background elements
-  - 3D card transforms with lift effects
-  - Gradient text animations
-  - Icon rotation and scale effects
-  
-- **Modern UI Components**:
-  - Rounded buttons with hover scale
-  - Gradient underlines on navigation
-  - Enhanced shadows and depth
-  - Glass morphism effects
-  - Smooth page transitions
-  
-- **Responsive Design**:
-  - Mobile-first approach
-  - Tablet and desktop optimized
-  - Touch-friendly interactions
-  - Adaptive grid layouts
+- **Professional Corporate UI**: Clean, modern, serious business aesthetic
+- **Mobile-First Responsive**: Perfect on all devices (mobile, tablet, desktop)
+- **Touch-Friendly**: Optimized for mobile interactions
+- **Fast Performance**: Optimized images and code splitting
+- **Smooth Animations**: Framer Motion transitions
+- **Accessible**: WCAG compliant color contrasts and navigation
 
 ### SEO Optimization
-- Unique meta titles and descriptions for each page
-- Keyword optimization
+- Unique meta titles and descriptions for all pages
+- Keyword optimization for target audiences
 - Open Graph tags for social sharing
-- Structured data ready
-- Semantic HTML structure
+- JSON-LD structured data (Organization, Website, Breadcrumbs)
+- Automatic sitemap generation
+- Semantic HTML5 structure
 
-## Content Highlights
-
-### Company Information
+## Company Information
 - **Name**: SSMT Solutions
-- **Tagline**: Empowering Digital Transformation with AI-Driven Cloud and Cybersecurity Solutions
+- **Tagline**: Your Complete Technology Partner for Digital Transformation
 - **Locations**:
   - Contact Center: Unit 101, Oxford Towers, Bengaluru, Karnataka 560008
   - Development Center: Shyam Nagar Colony, Pakur, Jharkhand, 816107
-- **Contact**: +91 9432588119, +91 9182607068, info@ssmtsolutions.com
+- **Contact**: 
+  - Phone: +91 9432588119, +91 9182607068
+  - Email: info@ssmtsolutions.com
+  - WhatsApp: 9432588119 (configured in forms)
 
-### Core Services
-1. Support & Consultancy
-2. Training & Research
-3. Product Design & Development
-4. Digital Marketing
-5. Enterprise Management
+## Configuration Required
 
-### Technologies
-- Software Development (Full-Stack, Java, Spring Boot, Python, Django, .NET, Angular, MERN, MEAN)
-- Data Engineering & Analytics (Python, SQL, Databricks, Snowflake, Apache Spark, Power BI, Tableau)
-- Data Science & AI (Generative AI, NLP, LLMs, TensorFlow, PyTorch, Hugging Face)
-- DevOps & Cloud (AWS, Azure, GCP, Docker, Kubernetes, Terraform, Jenkins)
+### 1. WhatsApp Number
+Update the WhatsApp number in these files:
+- `components/WhatsAppLeadForm.tsx` (line 22)
+- `components/WorkWithUsForm.tsx` (line 52)
+
+Change from `919432588119` to your actual number.
+
+### 2. Supabase Environment Variables
+Add these to Replit Secrets:
+- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anon/public key
+
+### 3. Database Setup
+Run `scripts/setup-certificate-db.sql` in your Supabase SQL editor to create the certificates table.
 
 ## Development
 
 ### Running Locally
-The project is configured to run on port 5000:
 ```bash
-npm run dev -- -p 5000
+npm run dev
+```
+Server runs on port 5000 (configured for Replit).
+
+### Build for Production
+```bash
+npm run build
+npm run start
 ```
 
 ### Workflow
-The Next.js Server workflow is set up to automatically start the development server on port 5000 when the project is opened.
+The Next.js Server workflow automatically starts on port 5000.
 
-## Production Deployment
-The website is optimized for production with:
-- Image optimization for external assets
-- SEO meta tags on all pages
-- Responsive design for all screen sizes
-- Performance optimizations with Next.js
-- Clean, maintainable code structure
+## Pages Overview
+
+1. **Home** (`/`) - ABCDE model, services, cost calculator, WhatsApp form
+2. **About** (`/about`) - Company story, mission, vision, values
+3. **Services** (`/services`) - All services overview
+4. **Training** (`/training`) - Training programs and internships
+5. **Careers** (`/careers`) - Job openings and Work With Us form
+6. **Portfolio** (`/portfolio`) - Project showcase
+7. **Contact** (`/contact`) - Contact information for both locations
+8. **Verify Certificate** (`/verify-certificate`) - Certificate validation
+9. **Service Details** - Individual service pages
+
+## Recent Changes
+
+### October 18, 2025 - Complete Website Transformation
+
+**Major Redesign:**
+- Transformed from colorful, playful design to professional corporate aesthetic
+- Redesigned home page with business-focused ABCDE model presentation
+- Clean typography, professional color scheme (blue, purple, gray tones)
+- Removed childish gradients and excessive animations
+
+**New Components:**
+- `CostCalculator.tsx` - Service pricing calculator with INR and GST
+- `WhatsAppLeadForm.tsx` - Lead generation via WhatsApp
+- `WorkWithUsForm.tsx` - Career application with salary expectations
+- `lib/supabase.ts` - Supabase database client
+
+**New Features:**
+- Interactive cost calculator for all services
+- WhatsApp integration for instant leads
+- Certificate verification system with Supabase
+- Career application form with compensation expectations
+- Database-backed certificate validation
+
+**Careers Page Redesign:**
+- Unique "Work With Us" button prominently displayed
+- Comprehensive application form with:
+  - Personal information
+  - Position and experience level
+  - Work type preferences
+  - Hourly rate expectations
+  - Monthly salary expectations
+  - Skills and availability
+- WhatsApp integration for applications
+- Better organized open positions
+- Enhanced benefits showcase
+
+**Technical Improvements:**
+- Mobile responsiveness across all pages
+- SEO optimization with proper meta tags
+- Structured data for better search visibility
+- Supabase integration for certificate system
+- Professional error handling
+- Comprehensive documentation
+
+## Documentation Files
+- `SETUP-INSTRUCTIONS.md` - Complete setup guide
+- `README-CERTIFICATE-SETUP.md` - Certificate system setup
+- `.env.local.example` - Environment variables template
 
 ## Browser Compatibility
 - Modern browsers (Chrome, Firefox, Safari, Edge)
 - Mobile responsive (iOS Safari, Chrome Mobile)
-- Tablet optimized
+- Tablet optimized (iPad, Android tablets)
 
-## Recent Changes
+## Security Best Practices
+- Environment variables for sensitive data
+- Supabase Row Level Security (RLS) enabled
+- Input validation on all forms
+- Secure WhatsApp integration (no backend storage)
+- HTTPS required for production
 
-### October 18, 2025 - Final Design Enhancement
-- **Enhanced Visual Design**: Upgraded to world-class, premium UI
-  - Tri-color gradient system (blue → purple → pink) across all elements
-  - Animated floating blobs on hero section for depth
-  - Improved card designs with 3D hover effects
-  - Enhanced button styling with gradient backgrounds
-  - Better shadows and border treatments
-  
-- **Typography & Spacing Improvements**:
-  - Larger, more impactful headlines
-  - Increased padding for better breathing room
-  - Better line-height and letter-spacing
-  
-- **Animation Enhancements**:
-  - Smooth gradient animations on text
-  - Card lift effects with scale transforms
-  - Icon rotation on hover
-  - Smooth page transitions
-  
-- **Technical Updates**:
-  - Downgraded from Tailwind v4 to v3 for stability
-  - Proper PostCSS configuration
-  - Custom utility classes for consistency
-  - Optimized CSS architecture
-  
-- **All Pages Fully Functional**:
-  - 8 complete pages with cohesive design
-  - No ESLint errors
-  - Proper Next.js Link components
-  - SEO optimization on all pages
-  - External logo properly configured
+## Performance Optimizations
+- Next.js automatic code splitting
+- Optimized images with Next/Image
+- Lazy loading for components
+- Efficient CSS with Tailwind
+- Minimal JavaScript bundle
 
 ## Notes
-- Logo is loaded from external URL: https://assets.zyrosite.com/dOqbv9lxjqcgzaab/logo-1a5478-YleMKeBbKPtZ382E.svg
-- All images are optimized with Next.js Image component
-- Tailwind CSS provides utility-first styling
-- Framer Motion adds smooth page transitions and animations
+- Logo loaded from external URL (optimized with Next/Image priority)
+- All forms use WhatsApp for instant communication
+- Certificate verification requires Supabase setup
+- Cost calculator uses client-side calculations (no backend required)
+- Mobile-first design approach throughout
+
+## Future Enhancements Suggestions
+- Admin panel for certificate management
+- Blog section for SEO
+- Client testimonials section
+- Live chat integration
+- Payment gateway for training enrollment
+- Automated email notifications
+- Analytics dashboard

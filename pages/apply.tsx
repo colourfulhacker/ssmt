@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
 import WhatsAppForm from '../components/WhatsAppForm';
@@ -111,8 +112,8 @@ const formFields = [
   },
 ];
 
-const messageTemplate = (data: Record<string, string>) => {
-  return `*New Job Application*
+const messageTemplate = (data: Record<string, string>, isInternship: boolean) => {
+  return `*New ${isInternship ? 'Internship' : 'Job'} Application*
 
 👤 *Candidate Details:*
 Name: ${data.fullName}
@@ -123,9 +124,9 @@ Location: ${data.currentLocation}
 💼 *Position Information:*
 Position: ${data.position}
 Experience: ${data.experience}
-Notice Period: ${data.noticePeriod}
-${data.currentCTC ? `Current CTC: ${data.currentCTC}` : ''}
-${data.expectedCTC ? `Expected CTC: ${data.expectedCTC}` : ''}
+${isInternship ? 'Application Type: Internship' : `Notice Period: ${data.noticePeriod}`}
+${!isInternship && data.currentCTC ? `Current CTC: ${data.currentCTC}` : ''}
+${!isInternship && data.expectedCTC ? `Expected CTC: ${data.expectedCTC}` : ''}
 
 🎯 *Key Skills:*
 ${data.skills}
@@ -133,16 +134,25 @@ ${data.skills}
 ${data.additionalInfo ? `💬 *Additional Information:*\n${data.additionalInfo}` : ''}
 
 ---
-This application was submitted via SSMT Solutions website.`;
+This ${isInternship ? 'internship' : 'job'} application was submitted via SSMT Solutions website.`;
 };
 
 export default function Apply() {
+  const router = useRouter();
+  const applicationType = (router.query.type as string) || 'job';
+  const isInternship = applicationType === 'intern';
+  
+  const pageTitle = isInternship ? 'Apply for Internship' : 'Apply for Job';
+  const pageDescription = isInternship 
+    ? 'Apply for internship opportunities at SSMT Solutions. Gain hands-on experience in software development, data science, cloud computing, and more.'
+    : 'Apply for career opportunities at SSMT Solutions. Join our team of experts in software development, data science, cloud computing, and digital marketing.';
+  
   return (
     <>
       <SEO
-        title="Apply for Jobs"
-        description="Apply for career opportunities at SSMT Solutions. Join our team of experts in software development, data science, cloud computing, and digital marketing."
-        keywords="jobs at SSMT, career opportunities, software developer jobs, data engineer jobs, DevOps careers, Bengaluru jobs"
+        title={pageTitle}
+        description={pageDescription}
+        keywords={isInternship ? "internship SSMT, student internship, tech internship Bengaluru, software internship" : "jobs at SSMT, career opportunities, software developer jobs, data engineer jobs, DevOps careers, Bengaluru jobs"}
       />
       <StructuredData
         type="breadcrumb"
@@ -168,9 +178,13 @@ export default function Apply() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Join Our Team</h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              {isInternship ? 'Apply for Internship' : 'Join Our Team'}
+            </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
-              Start your career journey with SSMT Solutions
+              {isInternship 
+                ? 'Start your learning journey with hands-on experience' 
+                : 'Start your career journey with SSMT Solutions'}
             </p>
           </motion.div>
         </div>
@@ -179,12 +193,14 @@ export default function Apply() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <WhatsAppForm
-            title="Submit Your Application"
-            description="Fill out the application form below and we'll connect with you on WhatsApp to discuss the opportunity and next steps in the hiring process."
+            title={isInternship ? "Submit Your Internship Application" : "Submit Your Job Application"}
+            description={isInternship 
+              ? "Fill out the application form below and we'll connect with you on WhatsApp to discuss the internship opportunity."
+              : "Fill out the application form below and we'll connect with you on WhatsApp to discuss the opportunity and next steps in the hiring process."}
             fields={formFields}
-            messageTemplate={messageTemplate}
+            messageTemplate={(data) => messageTemplate(data, isInternship)}
             phoneNumber={WHATSAPP_NUMBER}
-            submitButtonText="Submit Application via WhatsApp"
+            submitButtonText={`Submit ${isInternship ? 'Internship' : 'Job'} Application via WhatsApp`}
           />
 
           <div className="mt-16 max-w-3xl mx-auto">
