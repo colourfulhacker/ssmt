@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
@@ -61,6 +62,7 @@ const coreServices = [
     title: 'IT Staffing & Resource Augmentation',
     description: 'Scale faster with pre-vetted, highly skilled IT professionals for contract, full-time, or project-based engagements.',
     gradient: 'from-blue-600 to-cyan-600',
+    image: '/images/IT_staffing_and_tech_professionals_ebd1c5c8.png',
     features: [
       'Cybersecurity & Network Security Engineers',
       'Cloud, DevOps & SRE Experts',
@@ -73,6 +75,7 @@ const coreServices = [
     title: 'Cybersecurity Training & Career Enablement',
     description: 'Advanced, practical training programs to create real-world cybersecurity professionals - not just certificate holders.',
     gradient: 'from-purple-600 to-pink-600',
+    image: '/images/Cybersecurity_training_classroom_environment_e55a7f88.png',
     features: [
       'Penetration Testing & Ethical Hacking',
       'SOC (Security Operations Center) Analyst',
@@ -85,6 +88,7 @@ const coreServices = [
     title: 'IT Consulting & Advisory Services',
     description: 'Deep expertise in Cybersecurity Architecture, DevSecOps Integration, and Cloud Governance.',
     gradient: 'from-indigo-600 to-purple-600',
+    image: '/images/IT_consulting_and_advisory_meeting_307936d5.png',
     features: [
       'Security Risk Assessments',
       'Cloud & Infrastructure Security',
@@ -263,6 +267,15 @@ export default function Home() {
                 >
                   <div className="h-full bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden transform hover:-translate-y-2">
                     <div className={`h-2 bg-gradient-to-r ${service.gradient}`}></div>
+                    <div className="relative h-64 overflow-hidden">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
                     <div className="p-8">
                       <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
                         <ServiceIcon className="w-8 h-8 text-white" />

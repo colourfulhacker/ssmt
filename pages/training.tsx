@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import SEO from '../components/SEO';
 import StructuredData from '../components/StructuredData';
@@ -12,6 +13,7 @@ const trainings = [
     description: 'Comprehensive training in penetration testing, SOC analysis, and security tools like Kali Linux, Wireshark, and Burp Suite.',
     icon: FaShieldAlt,
     color: 'from-red-500 to-pink-500',
+    image: '/images/Cybersecurity_training_classroom_environment_e55a7f88.png',
     duration: '12 Weeks',
     level: 'Intermediate to Advanced',
     syllabus: [
@@ -47,6 +49,7 @@ const trainings = [
     description: 'Master data pipelines, ETL processes, and tools like Databricks, Snowflake, Apache Spark, and Azure Data Factory.',
     icon: FaDatabase,
     color: 'from-blue-500 to-cyan-500',
+    image: '/images/Data_engineering_training_lab_ebfa82e0.png',
     duration: '10 Weeks',
     level: 'Beginner to Intermediate',
     syllabus: [
@@ -82,6 +85,7 @@ const trainings = [
     description: 'Learn machine learning, AI, NLP, and work with TensorFlow, PyTorch, and modern data science frameworks.',
     icon: FaBrain,
     color: 'from-purple-500 to-indigo-500',
+    image: '/images/Data_science_machine_learning_training_b72a02cd.png',
     duration: '14 Weeks',
     level: 'Intermediate to Advanced',
     syllabus: [
@@ -121,6 +125,7 @@ const trainings = [
     description: 'Master CI/CD, containerization, orchestration with Docker, Kubernetes, AWS, Azure, and automation tools.',
     icon: FaServer,
     color: 'from-green-500 to-teal-500',
+    image: '/images/DevOps_and_cloud_training_112e9c21.png',
     duration: '10 Weeks',
     level: 'Intermediate',
     syllabus: [
@@ -180,80 +185,93 @@ function TrainingCard({ training, index }: { training: typeof trainings[0]; inde
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="relative p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+      className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden"
     >
       {training.status === 'On Going' && (
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-10">
           <span className="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-full">
             {training.status}
           </span>
         </div>
       )}
       
-      <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${training.color} rounded-xl mb-6`}>
-        <training.icon className="w-8 h-8 text-white" />
+      <div className="relative h-56 overflow-hidden">
+        <Image
+          src={training.image}
+          alt={`${training.title} Training`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+          className="object-cover hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
       </div>
       
-      <h3 className="text-2xl font-bold text-gray-900 mb-4">{training.title}</h3>
-      <p className="text-gray-600 leading-relaxed mb-6">{training.description}</p>
-      
-      <div className="space-y-3 mb-6">
-        <div className="flex items-center text-gray-700">
-          <FaClock className="w-5 h-5 mr-3 text-blue-600" />
-          <span className="font-medium">Duration: {training.duration}</span>
+      <div className="p-8">
+        <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${training.color} rounded-xl mb-6`}>
+          <training.icon className="w-8 h-8 text-white" />
         </div>
-        <div className="flex items-center text-gray-700">
-          <FaCertificate className="w-5 h-5 mr-3 text-purple-600" />
-          <span className="font-medium">Level: {training.level}</span>
+        
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">{training.title}</h3>
+        <p className="text-gray-600 leading-relaxed mb-6">{training.description}</p>
+        
+        <div className="space-y-3 mb-6">
+          <div className="flex items-center text-gray-700">
+            <FaClock className="w-5 h-5 mr-3 text-blue-600" />
+            <span className="font-medium">Duration: {training.duration}</span>
+          </div>
+          <div className="flex items-center text-gray-700">
+            <FaCertificate className="w-5 h-5 mr-3 text-purple-600" />
+            <span className="font-medium">Level: {training.level}</span>
+          </div>
         </div>
-      </div>
 
-      <button
-        onClick={() => setShowSyllabus(!showSyllabus)}
-        className="w-full mb-4 py-3 px-6 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center"
-      >
-        <span>View Detailed Syllabus</span>
-        {showSyllabus ? (
-          <FaChevronUp className="ml-2 w-4 h-4" />
-        ) : (
-          <FaChevronDown className="ml-2 w-4 h-4" />
-        )}
-      </button>
-
-      <AnimatePresence>
-        {showSyllabus && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mb-6 overflow-hidden"
-          >
-            <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-6 rounded-xl space-y-4">
-              <h4 className="font-bold text-lg text-gray-900 mb-4">Course Curriculum</h4>
-              {training.syllabus.map((item, idx) => (
-                <div key={idx} className="border-l-4 border-blue-500 pl-4 py-2">
-                  <h5 className="font-semibold text-gray-900 mb-2">{item.module}</h5>
-                  <ul className="space-y-1">
-                    {item.topics.map((topic, topicIdx) => (
-                      <li key={topicIdx} className="flex items-start text-sm text-gray-700">
-                        <FaCheck className="w-3 h-3 mr-2 mt-1 text-green-500 flex-shrink-0" />
-                        <span>{topic}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      
-      <Link href={`/enroll?program=${encodeURIComponent(training.title)}`}>
-        <button className={`w-full py-3 px-6 bg-gradient-to-r ${training.color} text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}>
-          Enroll Now
+        <button
+          onClick={() => setShowSyllabus(!showSyllabus)}
+          className="w-full mb-4 py-3 px-6 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center"
+        >
+          <span>View Detailed Syllabus</span>
+          {showSyllabus ? (
+            <FaChevronUp className="ml-2 w-4 h-4" />
+          ) : (
+            <FaChevronDown className="ml-2 w-4 h-4" />
+          )}
         </button>
-      </Link>
+
+        <AnimatePresence>
+          {showSyllabus && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mb-6 overflow-hidden"
+            >
+              <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-6 rounded-xl space-y-4">
+                <h4 className="font-bold text-lg text-gray-900 mb-4">Course Curriculum</h4>
+                {training.syllabus.map((item, idx) => (
+                  <div key={idx} className="border-l-4 border-blue-500 pl-4 py-2">
+                    <h5 className="font-semibold text-gray-900 mb-2">{item.module}</h5>
+                    <ul className="space-y-1">
+                      {item.topics.map((topic, topicIdx) => (
+                        <li key={topicIdx} className="flex items-start text-sm text-gray-700">
+                          <FaCheck className="w-3 h-3 mr-2 mt-1 text-green-500 flex-shrink-0" />
+                          <span>{topic}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        <Link href={`/enroll?program=${encodeURIComponent(training.title)}`}>
+          <button className={`w-full py-3 px-6 bg-gradient-to-r ${training.color} text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}>
+            Enroll Now
+          </button>
+        </Link>
+      </div>
     </motion.div>
   );
 }
