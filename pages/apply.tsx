@@ -8,6 +8,15 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 const WHATSAPP_NUMBER = '919432588119';
 
+interface FormField {
+  name: string;
+  label: string;
+  type: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  required?: boolean;
+  options?: string[];
+  placeholder?: string;
+}
+
 const jobPositions = [
   'Software Developer (Full-Stack)',
   'Java Developer',
@@ -18,6 +27,10 @@ const jobPositions = [
   'Cloud Architect',
   'Cybersecurity Analyst',
   'Digital Marketing Specialist',
+  'Content Marketing Manager',
+  'SEO Specialist',
+  'Social Media Marketing',
+  'Marketing Intern',
   'Business Analyst',
   'UI/UX Designer',
   'Product Manager',
@@ -32,85 +45,97 @@ const experienceLevels = [
   'Lead/Expert (8+ years)',
 ];
 
-const formFields = [
-  {
-    name: 'fullName',
-    label: 'Full Name',
-    type: 'text' as const,
-    required: true,
-    placeholder: 'Enter your full name',
-  },
-  {
-    name: 'email',
-    label: 'Email Address',
-    type: 'email' as const,
-    required: true,
-    placeholder: 'your.email@example.com',
-  },
-  {
-    name: 'phone',
-    label: 'Phone Number',
-    type: 'tel' as const,
-    required: true,
-    placeholder: '+91 XXXXX XXXXX',
-  },
-  {
-    name: 'position',
-    label: 'Position Applying For',
-    type: 'select' as const,
-    required: true,
-    options: jobPositions,
-  },
-  {
-    name: 'experience',
-    label: 'Experience Level',
-    type: 'select' as const,
-    required: true,
-    options: experienceLevels,
-  },
-  {
-    name: 'currentLocation',
-    label: 'Current Location',
-    type: 'text' as const,
-    required: true,
-    placeholder: 'City, State',
-  },
-  {
-    name: 'noticePeriod',
-    label: 'Notice Period',
-    type: 'select' as const,
-    required: true,
-    options: ['Immediate', '15 days', '30 days', '60 days', '90 days'],
-  },
-  {
-    name: 'currentCTC',
-    label: 'Current CTC (Annual)',
-    type: 'text' as const,
-    required: false,
-    placeholder: 'e.g., 5 LPA (Optional)',
-  },
-  {
-    name: 'expectedCTC',
-    label: 'Expected CTC (Annual)',
-    type: 'text' as const,
-    required: false,
-    placeholder: 'e.g., 7 LPA (Optional)',
-  },
-  {
-    name: 'skills',
-    label: 'Key Skills',
-    type: 'textarea' as const,
-    required: true,
-    placeholder: 'List your key technical skills, tools, and technologies...',
-  },
-  {
-    name: 'additionalInfo',
-    label: 'Why do you want to join SSMT Solutions?',
-    type: 'textarea' as const,
-    required: false,
-    placeholder: 'Tell us about your career goals and why you are interested in this position...',
-  },
-];
+const getFormFields = (isInternship: boolean): FormField[] => {
+  const baseFields: FormField[] = [
+    {
+      name: 'fullName',
+      label: 'Full Name',
+      type: 'text' as const,
+      required: true,
+      placeholder: 'Enter your full name',
+    },
+    {
+      name: 'email',
+      label: 'Email Address',
+      type: 'email' as const,
+      required: true,
+      placeholder: 'your.email@example.com',
+    },
+    {
+      name: 'phone',
+      label: 'Phone Number',
+      type: 'tel' as const,
+      required: true,
+      placeholder: '+91 XXXXX XXXXX',
+    },
+    {
+      name: 'position',
+      label: 'Position Applying For',
+      type: 'select' as const,
+      required: true,
+      options: jobPositions,
+    },
+    {
+      name: 'experience',
+      label: 'Experience Level',
+      type: 'select' as const,
+      required: true,
+      options: experienceLevels,
+    },
+    {
+      name: 'currentLocation',
+      label: 'Current Location',
+      type: 'text' as const,
+      required: true,
+      placeholder: 'City, State',
+    },
+  ];
+
+  if (!isInternship) {
+    baseFields.push({
+      name: 'noticePeriod',
+      label: 'Notice Period',
+      type: 'select' as const,
+      required: true,
+      options: ['Immediate', '15 days', '30 days', '60 days', '90 days'],
+    });
+  }
+
+  baseFields.push(
+    {
+      name: 'currentCTC',
+      label: isInternship ? 'Expected Stipend (Monthly)' : 'Current CTC (Annual)',
+      type: 'text' as const,
+      required: false,
+      placeholder: isInternship ? 'e.g., ₹10,000 per month (Optional)' : 'e.g., 5 LPA (Optional)',
+    },
+    {
+      name: 'expectedCTC',
+      label: isInternship ? 'Preferred Stipend (Monthly)' : 'Expected CTC (Annual)',
+      type: 'text' as const,
+      required: false,
+      placeholder: isInternship ? 'e.g., ₹15,000 per month (Optional)' : 'e.g., 7 LPA (Optional)',
+    },
+    {
+      name: 'skills',
+      label: 'Key Skills',
+      type: 'textarea',
+      required: true,
+      placeholder: 'List your key technical skills, tools, and technologies...',
+    },
+    {
+      name: 'additionalInfo',
+      label: isInternship ? 'Why do you want this internship?' : 'Why do you want to join SSMT Solutions?',
+      type: 'textarea',
+      required: false,
+      placeholder: isInternship 
+        ? 'Tell us about your learning goals and what you hope to gain from this internship...'
+        : 'Tell us about your career goals and why you are interested in this position...',
+    }
+  );
+
+  return baseFields;
+};
 
 const messageTemplate = (data: Record<string, string>, isInternship: boolean) => {
   return `*New ${isInternship ? 'Internship' : 'Job'} Application*
@@ -125,6 +150,10 @@ Location: ${data.currentLocation}
 Position: ${data.position}
 Experience: ${data.experience}
 ${isInternship ? 'Application Type: Internship' : `Notice Period: ${data.noticePeriod}`}
+
+${isInternship ? '💰 *Stipend Expectations:*' : '💰 *Compensation Details:*'}
+${isInternship && data.currentCTC ? `Expected Stipend: ${data.currentCTC}` : ''}
+${isInternship && data.expectedCTC ? `Preferred Stipend: ${data.expectedCTC}` : ''}
 ${!isInternship && data.currentCTC ? `Current CTC: ${data.currentCTC}` : ''}
 ${!isInternship && data.expectedCTC ? `Expected CTC: ${data.expectedCTC}` : ''}
 
@@ -197,7 +226,7 @@ export default function Apply() {
             description={isInternship 
               ? "Fill out the application form below and we'll connect with you on WhatsApp to discuss the internship opportunity."
               : "Fill out the application form below and we'll connect with you on WhatsApp to discuss the opportunity and next steps in the hiring process."}
-            fields={formFields}
+            fields={getFormFields(isInternship)}
             messageTemplate={(data) => messageTemplate(data, isInternship)}
             phoneNumber={WHATSAPP_NUMBER}
             submitButtonText={`Submit ${isInternship ? 'Internship' : 'Job'} Application via WhatsApp`}

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import SEO from '../components/SEO';
 import WorkWithUsForm from '../components/WorkWithUsForm';
+import CompanyFactsSlider from '../components/CompanyFactsSlider';
 import { 
   FaUsers, FaRocket, FaLaptop, FaGraduationCap, 
   FaMoneyBillWave, FaHeartbeat, FaTrophy, FaGlobe 
@@ -78,6 +79,41 @@ const openPositions = [
     location: 'Bengaluru',
     type: 'Full-time',
     experience: '2+ years',
+  },
+  {
+    title: 'Digital Marketing Specialist',
+    department: 'Marketing',
+    location: 'Bengaluru / Remote',
+    type: 'Full-time',
+    experience: '2-4 years',
+  },
+  {
+    title: 'Content Marketing Manager',
+    department: 'Marketing',
+    location: 'Remote',
+    type: 'Full-time',
+    experience: '3+ years',
+  },
+  {
+    title: 'SEO Specialist',
+    department: 'Marketing',
+    location: 'Bengaluru / Remote',
+    type: 'Full-time',
+    experience: '2-3 years',
+  },
+  {
+    title: 'Social Media Marketing',
+    department: 'Marketing',
+    location: 'Remote',
+    type: 'Full-time / Part-time',
+    experience: '1-3 years',
+  },
+  {
+    title: 'Marketing Intern',
+    department: 'Marketing',
+    location: 'Bengaluru',
+    type: 'Internship',
+    experience: 'Fresher / Student',
   },
   {
     title: 'Technical Trainer',
@@ -162,6 +198,34 @@ export default function Careers() {
                 </div>
               </Link>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-gradient-to-br from-gray-100 to-gray-50">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              SSMT Solutions by the Numbers
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Proven track record of excellence and innovation
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="max-w-4xl mx-auto"
+          >
+            <CompanyFactsSlider />
           </motion.div>
         </div>
       </section>
